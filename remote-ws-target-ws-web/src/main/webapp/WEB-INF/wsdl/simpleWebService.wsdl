@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:tns="http://remotewstarget.magicvalleyworks.com/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        targetNamespace="http://remotewstarget.magicvalleyworks.com/">
+    <types>
+        <xsd:schema targetNamespace="http://remotewstarget.magicvalleyworks.com/">
+            <xsd:element name="processDataInputType" type="xsd:string"/>
+        </xsd:schema>
+        <xsd:schema targetNamespace="http://remotewstarget.magicvalleyworks.com/">
+            <xsd:element name="processDataOutputType" type="xsd:string"/>
+        </xsd:schema>
+    </types>
+    <message name="processDataInputMessage">
+        <part name="data" element="tns:processDataInputType"/>
+    </message>
+    <message name="processDataOutputMessage">
+        <part name="output" element="tns:processDataOutputType"/>
+    </message>
+    <portType name="SimpleWebService">
+        <operation name="processData">
+            <input message="tns:processDataInputMessage"/>
+            <output message="tns:processDataOutputMessage"/>
+        </operation>
+    </portType>
+    <binding name="SimpleWebServiceBinding" type="tns:SimpleWebService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="processData">
+            <soap:operation soapAction="http://remotewstarget.magicvalleyworks.com/SimpleWebService/processData"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="SimpleWebService">
+        <port name="SimpleWebServicePort" binding="tns:SimpleWebServiceBinding">
+            <soap:address location="http://localhost:8080/rwst/SimpleWebService"/>
+        </port>
+    </service>
+</definitions>
