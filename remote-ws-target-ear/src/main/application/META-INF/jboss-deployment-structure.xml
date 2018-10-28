@@ -1,5 +1,10 @@
 <jboss-deployment-structure>
     <deployment>
         <module-alias name="deployment.remote-ws-target" />
+        <!--
+        <dependencies>
+            <module name="com.magicvalleyworks.remotewstarget.sharedlibs" export="true" />
+        </dependencies>
+        -->
     </deployment>
 </jboss-deployment-structure>

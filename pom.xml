@@ -13,6 +13,7 @@
         <module>remote-ws-target-service</module>
         <module>remote-ws-target-ear</module>
         <module>remote-ws-target-parent</module>
+        <module>wf-consul-registrar</module>
     </modules>
 
 
