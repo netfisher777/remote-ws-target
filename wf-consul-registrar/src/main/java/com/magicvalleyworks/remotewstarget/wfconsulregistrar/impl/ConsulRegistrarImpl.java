@@ -19,7 +19,7 @@ import java.util.UUID;
 public class ConsulRegistrarImpl implements ConsulRegistrar {
     // Assumes that the consul agent exists on the same machine as the app server,
     // on which this application is installed on
-    private static final String CONSUL_AGENT_HOST = "195.133.1.42";
+    private static final String CONSUL_AGENT_HOST = "localhost";
     private static final Integer CONSUL_AGENT_PORT = 8500;
 
     private ConsulClient consulClient;
