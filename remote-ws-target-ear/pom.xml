@@ -59,6 +59,7 @@
                             <contextRoot>/rwst</contextRoot>
                         </webModule>
                     </modules>
+                    <earSourceDirectory>src/main/resources</earSourceDirectory>
                 </configuration>
             </plugin>
         </plugins>
