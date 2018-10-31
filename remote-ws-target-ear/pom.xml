@@ -12,6 +12,10 @@
     <artifactId>remote-ws-target-ear</artifactId>
     <packaging>ear</packaging>
 
+    <properties>
+        <earFinalName>${project.parent.artifactId}</earFinalName>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.magicvalleyworks.remotewstarget</groupId>
@@ -34,7 +38,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.parent.artifactId}</finalName>
+        <finalName>${earFinalName}</finalName>
         <plugins>
             <!-- EAR plug-in -->
             <plugin>
@@ -59,8 +63,30 @@
                             <contextRoot>/rwst</contextRoot>
                         </webModule>
                     </modules>
-                    <earSourceDirectory>src/main/resources</earSourceDirectory>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/${earFinalName}/lib</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
