@@ -14,6 +14,7 @@
         <module>remote-ws-target-ear</module>
         <module>remote-ws-target-parent</module>
         <module>wf-consul-registrar</module>
+        <module>wf-consul-registrar-config</module>
     </modules>
 
 

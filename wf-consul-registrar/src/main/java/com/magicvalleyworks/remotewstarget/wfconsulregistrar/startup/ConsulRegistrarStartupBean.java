@@ -28,7 +28,7 @@ public class ConsulRegistrarStartupBean {
 
     private void registerServices() {
 
-        try (InputStream wsRegConfInputStream = this.getClass().getResourceAsStream("ws-reg-conf.json")) {
+        try (InputStream wsRegConfInputStream = this.getClass().getClassLoader().getResourceAsStream("ws-reg-conf.json")) {
             if (wsRegConfInputStream != null) {
                 String wsRegConfString = IOUtils.toString(wsRegConfInputStream);
                 logger.info(String.format("Content of the wsRegConfString = %s", wsRegConfString));
