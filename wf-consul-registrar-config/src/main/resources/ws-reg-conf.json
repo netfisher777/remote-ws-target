@@ -1,1 +1,14 @@
-test
+{
+  "webServiceRegConfigs": [
+    {
+      "name": "SimpleWebService",
+      "tags": [
+        "private", "ws", "soap"
+      ],
+      "meta": {
+        "path": "rwst/SimpleWebService"
+      },
+      "httpHealthCheckPath": "rwst/SimpleWebService?wsdl"
+    }
+  ]
+}

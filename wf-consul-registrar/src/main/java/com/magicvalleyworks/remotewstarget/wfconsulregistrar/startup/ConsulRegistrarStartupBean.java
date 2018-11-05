@@ -1,7 +1,9 @@
 package com.magicvalleyworks.remotewstarget.wfconsulregistrar.startup;
 
 import com.magicvalleyworks.remotewstarget.wfconsulregistrar.api.ConsulRegistrar;
-import org.apache.commons.io.IOUtils;
+import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.AppServicesRegConfig;
+import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.WebServiceRegConfig;
+import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.WebServicesRegConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,8 +12,7 @@ import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.List;
 
 @Startup
 @Singleton
@@ -21,26 +22,27 @@ public class ConsulRegistrarStartupBean {
     @Inject
     private ConsulRegistrar consulRegistrar;
 
+    @Inject
+    private AppServicesRegConfig appServicesRegConfig;
+
     @PostConstruct
     public void initialize() {
         registerServices();
     }
 
     private void registerServices() {
+        logger.info("Services registration was started");
+        registerWebServices();
+        logger.info("Services registration was ended");
+    }
 
-        try (InputStream wsRegConfInputStream = this.getClass().getClassLoader().getResourceAsStream("ws-reg-conf.json")) {
-            if (wsRegConfInputStream != null) {
-                String wsRegConfString = IOUtils.toString(wsRegConfInputStream);
-                logger.info(String.format("Content of the wsRegConfString = %s", wsRegConfString));
-            } else {
-                logger.info("wsRegConfInputStream is null");
-            }
-        } catch(IOException ex) {
-            logger.error("", ex);
+    private void registerWebServices() {
+        appServicesRegConfig.loadWebServicesRegistrationConfiguration();
+        WebServicesRegConfig webServicesRegConfig = appServicesRegConfig.getWebServicesRegConfig();
+        List<WebServiceRegConfig> webServiceRegConfigs = webServicesRegConfig.getWebServiceRegConfigs();
+        for(WebServiceRegConfig conf : webServiceRegConfigs) {
+            consulRegistrar.registerWebService(conf);
         }
-
-
-        consulRegistrar.registerWebService("SimpleWebService", "rwst/SimpleWebService?wsdl");
     }
 
 
