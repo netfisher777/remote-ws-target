@@ -7,17 +7,13 @@ import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.WebServ
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import javax.inject.Inject;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import java.util.List;
 
-@Startup
-@Singleton
-public class ConsulRegistrarStartupBean {
-    private static final Logger logger = LoggerFactory.getLogger(ConsulRegistrarStartupBean.class);
+public class ConsulRegistrarServletContextListener implements ServletContextListener {
+    private static final Logger logger = LoggerFactory.getLogger(ConsulRegistrarServletContextListener.class);
 
     @Inject
     private ConsulRegistrar consulRegistrar;
@@ -25,9 +21,14 @@ public class ConsulRegistrarStartupBean {
     @Inject
     private AppServicesRegConfig appServicesRegConfig;
 
-    @PostConstruct
-    public void initialize() {
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
         registerServices();
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        consulRegistrar.deregisterServices();
     }
 
     private void registerServices() {
@@ -43,11 +44,5 @@ public class ConsulRegistrarStartupBean {
         for(WebServiceRegConfig conf : webServiceRegConfigs) {
             consulRegistrar.registerWebService(conf);
         }
-    }
-
-
-    @PreDestroy
-    public void terminate() {
-        consulRegistrar.deregisterServices();
     }
 }

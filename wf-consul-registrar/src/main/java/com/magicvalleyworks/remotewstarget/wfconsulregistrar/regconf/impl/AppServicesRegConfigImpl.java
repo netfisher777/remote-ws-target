@@ -1,7 +1,6 @@
 package com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.impl;
 
 import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.AppServicesRegConfig;
-import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.WebServiceRegConfig;
 import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.WebServicesRegConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +16,11 @@ import java.io.InputStream;
 public class AppServicesRegConfigImpl implements AppServicesRegConfig {
     private WebServicesRegConfig webServicesRegConfig;
     private static final Logger logger = LoggerFactory.getLogger(AppServicesRegConfigImpl.class);
-    private static final String WS__REG_CONFIG_FILE_NAME = "ws-reg-conf.json";
+    private static final String WS_REG_CONFIG_FILE = "WEB-INF/ws-reg-conf.json";
 
     @Override
     public void loadWebServicesRegistrationConfiguration() {
-        this.webServicesRegConfig = loadObjectFromJsonFileInClasspath(WS__REG_CONFIG_FILE_NAME, WebServicesRegConfig.class);
+        this.webServicesRegConfig = loadObjectFromJsonFileInClasspath(WS_REG_CONFIG_FILE, WebServicesRegConfig.class);
     }
 
     private <T> T loadObjectFromJsonFileInClasspath(String filename, Class<T> type) {

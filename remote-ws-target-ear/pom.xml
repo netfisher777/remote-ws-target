@@ -29,18 +29,6 @@
             <version>1.0-SNAPSHOT</version>
             <type>ejb</type>
         </dependency>
-        <dependency>
-            <groupId>com.magicvalleyworks.remotewstarget</groupId>
-            <artifactId>wf-consul-registrar</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>ejb</type>
-        </dependency>
-        <dependency>
-            <groupId>com.magicvalleyworks.remotewstarget</groupId>
-            <artifactId>wf-consul-registrar-config</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
 
     <build>
@@ -68,11 +56,6 @@
                             <artifactId>remote-ws-target-ws-web</artifactId>
                             <contextRoot>/rwst</contextRoot>
                         </webModule>
-                        <jarModule>
-                            <groupId>com.magicvalleyworks.remotewstarget</groupId>
-                            <artifactId>wf-consul-registrar-config</artifactId>
-                            <bundleFileName>wf-consul-registrar-config.jar</bundleFileName>
-                        </jarModule>
                     </modules>
                 </configuration>
             </plugin>
