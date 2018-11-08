@@ -1,11 +1,14 @@
-package com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.impl;
+package com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.regconf.impl;
 
-import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.AppServicesRegConfig;
-import com.magicvalleyworks.remotewstarget.wfconsulregistrar.regconf.api.WebServicesRegConfig;
+import com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.context.api.ConsulRegistrationContext;
+import com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.regconf.api.AppServicesRegConfig;
+import com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.regconf.api.WebServicesRegConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.json.bind.JsonbException;
@@ -16,11 +19,22 @@ import java.io.InputStream;
 public class AppServicesRegConfigImpl implements AppServicesRegConfig {
     private WebServicesRegConfig webServicesRegConfig;
     private static final Logger logger = LoggerFactory.getLogger(AppServicesRegConfigImpl.class);
-    private static final String WS_REG_CONFIG_FILE = "ws-reg-conf.json";
 
-    @Override
-    public void loadWebServicesRegistrationConfiguration() {
-        this.webServicesRegConfig = loadObjectFromJsonFileInClasspath(WS_REG_CONFIG_FILE, WebServicesRegConfig.class);
+    @Inject
+    private ConsulRegistrationContext consulRegistrationContext;
+
+    @PostConstruct
+    private void initialize() {
+        loadWebServicesRegistrationConfiguration();
+    }
+
+    private void loadWebServicesRegistrationConfiguration() {
+        String webServicesConfigurationFileName = consulRegistrationContext.getWebServicesConfigurationFileName();
+        if (webServicesConfigurationFileName != null) {
+            this.webServicesRegConfig = loadObjectFromJsonFileInClasspath(webServicesConfigurationFileName, WebServicesRegConfig.class);
+        } else {
+            logger.warn("ConsulRegistrationContext doesn't contain web services configuration file name. Nothing to load");
+        }
     }
 
     private <T> T loadObjectFromJsonFileInClasspath(String filename, Class<T> type) {
@@ -32,7 +46,7 @@ public class AppServicesRegConfigImpl implements AppServicesRegConfig {
                 deserializedObject = jsonb.fromJson(inputStream, type);
                 logger.info(String.format("Data from %s was successfully loaded", filename));
             } else {
-                logger.info(String.format("File with name %s was not found in classpath. Nothing to load", filename));
+                logger.warn(String.format("File with name %s was not found in classpath. Nothing to load", filename));
             }
         } catch (JsonbException ex) {
             logger.error(String.format("JsonbException: Can't serialize data from %s", filename), ex);

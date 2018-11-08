@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.magicvalleyworks.remotewstarget</groupId>
-            <artifactId>wf-consul-registrar</artifactId>
+            <artifactId>wf-web-consul-registrar</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

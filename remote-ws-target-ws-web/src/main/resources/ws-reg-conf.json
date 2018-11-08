@@ -6,9 +6,9 @@
         "private", "ws", "soap"
       ],
       "meta": {
-        "path": "rwst/SimpleWebService"
+        "path": "/SimpleWebService"
       },
-      "httpHealthCheckPath": "rwst/SimpleWebService?wsdl"
+      "httpHealthCheckPath": "/SimpleWebService?wsdl"
     }
   ]
 }

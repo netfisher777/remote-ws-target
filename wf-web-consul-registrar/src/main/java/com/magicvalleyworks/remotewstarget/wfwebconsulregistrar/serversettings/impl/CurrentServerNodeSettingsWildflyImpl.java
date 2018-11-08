@@ -1,6 +1,6 @@
-package com.magicvalleyworks.remotewstarget.wfconsulregistrar.serversettings.impl;
+package com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.serversettings.impl;
 
-import com.magicvalleyworks.remotewstarget.wfconsulregistrar.serversettings.api.CurrentServerNodeSettings;
+import com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.serversettings.api.CurrentServerNodeSettings;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.management.MBeanServer;
