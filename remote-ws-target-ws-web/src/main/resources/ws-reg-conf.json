@@ -1,0 +1,14 @@
+{
+  "webServiceRegConfigs": [
+    {
+      "name": "SimpleWebService",
+      "tags": [
+        "private", "ws", "soap"
+      ],
+      "meta": {
+        "path": "/SimpleWebService"
+      },
+      "httpHealthCheckPath": "/SimpleWebService?wsdl"
+    }
+  ]
+}
