@@ -3,6 +3,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <context-param>
+        <param-name>WEB_SERVICES_REGISTRATION_CONFIGURATION_FILE</param-name>
+        <param-value>ws-reg-conf.json</param-value>
+    </context-param>
     <listener>
         <listener-class>com.magicvalleyworks.remotewstarget.wfconsulregistrar.startup.ConsulRegistrarServletContextListener</listener-class>
     </listener>

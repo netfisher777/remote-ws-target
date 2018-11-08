@@ -16,7 +16,7 @@ import java.io.InputStream;
 public class AppServicesRegConfigImpl implements AppServicesRegConfig {
     private WebServicesRegConfig webServicesRegConfig;
     private static final Logger logger = LoggerFactory.getLogger(AppServicesRegConfigImpl.class);
-    private static final String WS_REG_CONFIG_FILE = "WEB-INF/ws-reg-conf.json";
+    private static final String WS_REG_CONFIG_FILE = "ws-reg-conf.json";
 
     @Override
     public void loadWebServicesRegistrationConfiguration() {
