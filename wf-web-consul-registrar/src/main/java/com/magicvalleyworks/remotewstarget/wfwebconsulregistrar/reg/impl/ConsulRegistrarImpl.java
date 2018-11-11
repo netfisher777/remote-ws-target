@@ -1,7 +1,10 @@
 package com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.reg.impl;
 
 import com.ecwid.consul.v1.ConsulClient;
+import com.ecwid.consul.v1.QueryParams;
+import com.ecwid.consul.v1.Response;
 import com.ecwid.consul.v1.agent.model.NewService;
+import com.ecwid.consul.v1.catalog.model.CatalogService;
 import com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.context.api.ConsulRegistrationContext;
 import com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.reg.api.ConsulRegistrar;
 import com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.regconf.api.AppServicesRegConfig;
@@ -17,6 +20,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.text.MessageFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ConsulRegistrarImpl implements ConsulRegistrar {
@@ -66,10 +70,16 @@ public class ConsulRegistrarImpl implements ConsulRegistrar {
 
     @Override
     public void deregisterWebServices() {
-        for (String serviceId : registeredWebServicesIds) {
-            consulClient.agentServiceDeregister(serviceId);
+        List<String> registeredWebServicesIdsCopy = new ArrayList<>(registeredWebServicesIds);
+        for (String serviceId : registeredWebServicesIdsCopy) {
+            deregisterWebService(serviceId);
             logger.info(String.format("Service with id = \"%s\" was deregistered from Consul", serviceId));
         }
+    }
+
+    private void deregisterWebService(String serviceId) {
+        consulClient.agentServiceDeregister(serviceId);
+        registeredWebServicesIds.remove(serviceId);
     }
 
     private void registerWebService(WebServiceRegConfig webServiceRegConfig) {
@@ -80,13 +90,51 @@ public class ConsulRegistrarImpl implements ConsulRegistrar {
         String webServiceName = webService.getName();
         String webServiceId = webService.getId();
         Map<String, String> metaMap = webService.getMeta();
+        String webServicePath = metaMap.get(WEB_SERVICE_PATH_META_KEY);
         List<String> tags = webService.getTags();
+
+        checkAndRemoveWebServiceDuplicates(serviceHost, servicePort, webServiceName, webServicePath);
         consulClient.agentServiceRegister(webService);
+
         logger.info(String.format("Service with name = \"%s\", id = \"%s\", " +
-                "host = \"%s\", port = \"%s\", meta = \"%s\", tags = \"%s\" was registered in Consul",
+                        "host = \"%s\", port = \"%s\", meta = \"%s\", tags = \"%s\" was registered in Consul",
                 webServiceName, webServiceId, serviceHost, servicePort, metaMap, tags));
 
         registeredWebServicesIds.add(webServiceId);
+    }
+
+    // Remove duplicated web services if they were not deregistered from consul for the some reasons (e.g. kill -9 wildfly_process)
+    private void checkAndRemoveWebServiceDuplicates(String serviceHost, Integer servicePort, String serviceName, String servicePath) {
+        Response<List<CatalogService>> response = consulClient.getCatalogService(serviceName, QueryParams.DEFAULT);
+        List<CatalogService> services = response != null ? response.getValue() : null;
+        if (services != null) {
+            for (CatalogService service : services) {
+                removeWebServiceIfDuplicate(service, serviceHost, servicePort, serviceName, servicePath);
+            }
+        }
+    }
+
+    private void removeWebServiceIfDuplicate(CatalogService foundService, String serviceHost, Integer servicePort, String serviceName, String servicePath) {
+        String foundServiceId = foundService.getServiceId();
+        String foundServiceName = foundService.getServiceName();
+        String foundServiceHost = foundService.getServiceAddress();
+        Integer foundServicePort = foundService.getServicePort();
+        Map<String, String> foundServiceMeta = foundService.getServiceMeta();
+        String foundServicePath = foundServiceMeta.get(WEB_SERVICE_PATH_META_KEY);
+
+        boolean isFoundServiceTheSame = serviceHost != null && serviceHost.equals(foundServiceHost)
+                                        &&
+                                        servicePort != null && servicePort.equals(foundServicePort)
+                                        &&
+                                        serviceName != null && serviceName.equals(foundServiceName)
+                                        &&
+                                        servicePath != null && servicePath.equals(foundServicePath);
+
+        if (isFoundServiceTheSame) {
+            deregisterWebService(foundServiceId);
+            logger.info(String.format("Was found previously registered service with the same registration configuration as we trying to register now: " +
+                    "name = \"%s\", host = \"%s\", port = \"%s\", path = \"%s\". Duplicate was removed", foundServiceName, foundServiceHost, foundServicePort, foundServicePath));
+        }
     }
 
     private NewService buildNewWebService(String serviceHost, Integer servicePort, WebServiceRegConfig webServiceRegConfig) {
