@@ -34,7 +34,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.magicvalleyworks.remotewstarget</groupId>
+            <groupId>com.magicvalleyworks.wfwebconsulregistrar</groupId>
             <artifactId>wf-web-consul-registrar</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

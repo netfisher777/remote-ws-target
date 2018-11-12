@@ -18,6 +18,6 @@
     </context-param>
     <!-- END OF OPTIONAL PARAMETERS -->
     <listener>
-        <listener-class>com.magicvalleyworks.remotewstarget.wfwebconsulregistrar.startup.ConsulRegistrarServletContextListener</listener-class>
+        <listener-class>com.magicvalleyworks.wfwebconsulregistrar.startup.ConsulRegistrarServletContextListener</listener-class>
     </listener>
 </web-app>

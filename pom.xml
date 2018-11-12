@@ -11,7 +11,6 @@
     <modules>
         <module>remote-ws-target-ear</module>
         <module>remote-ws-target-parent</module>
-        <module>wf-web-consul-registrar</module>
         <module>remote-ws-target-ws-facade</module>
         <module>remote-ws-target-ws-facade-api</module>
     </modules>
