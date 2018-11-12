@@ -1,0 +1,20 @@
+<xsd:schema xmlns:tns="http://remotewstarget.magicvalleyworks.com/"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            version="1.0"
+            targetNamespace="http://remotewstarget.magicvalleyworks.com/">
+    <xsd:include schemaLocation="../schema/types.xsd"/>
+    <xsd:element name="processDataRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="processDataRequest" type="tns:data"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="processDataResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="processDataResponse" type="tns:data"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
