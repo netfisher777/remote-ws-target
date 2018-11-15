@@ -11,8 +11,8 @@
     <modules>
         <module>remote-ws-target-ear</module>
         <module>remote-ws-target-parent</module>
-        <module>remote-ws-target-ws-facade</module>
-        <module>remote-ws-target-ws-facade-api</module>
+        <module>remote-ws-target-facade-ws</module>
+        <module>remote-ws-target-facade-ws-api</module>
     </modules>
 
 </project>

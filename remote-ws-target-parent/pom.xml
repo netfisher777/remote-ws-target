@@ -12,7 +12,7 @@
     <artifactId>remote-ws-target-parent</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>remote-ws-target-parent-ws-facade</module>
+        <module>remote-ws-target-parent-facade-ws</module>
     </modules>
 
     <dependencyManagement>
