@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>remote-ws-target-parent-facade-ws</module>
+        <module>remote-ws-target-parent-facade-ws-api-proxy</module>
     </modules>
 
     <dependencyManagement>

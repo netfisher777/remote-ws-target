@@ -1,4 +1,4 @@
-package com.magicvalleyworks.remotewstarget.wsfacadeapi.clientproxy;
+package com.magicvalleyworks.remotewstarget.facadewsapi.clientproxy;
 
 import com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews.Data;
 import com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews.SimpleWebService;

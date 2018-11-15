@@ -7,7 +7,7 @@
         targetNamespace="http://remotewstarget.magicvalleyworks.com/">
     <types>
         <xsd:schema>
-            <xsd:import namespace="http://remotewstarget.magicvalleyworks.com/" schemaLocation="../io_type_defs/simpleWebService_io_type_defs.xsd"/>
+            <xsd:import namespace="http://remotewstarget.magicvalleyworks.com/" schemaLocation="../ioTypeDefs/simpleWebService_io_type_defs.xsd"/>
         </xsd:schema>
     </types>
     <message name="processDataRequest">
