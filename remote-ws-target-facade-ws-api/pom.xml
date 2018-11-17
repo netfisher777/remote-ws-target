@@ -17,22 +17,21 @@
                 <version>2.5</version>
                 <executions>
                     <execution>
-                        <id>simpleWebServiceWSDL</id>
-                        <phase>generate-sources</phase>
                         <goals>
                             <goal>wsimport</goal>
                         </goals>
-                        <configuration>
-                            <wsdlFiles>
-                                <wsdlFile>${project.basedir}/src/main/resources/wsdl/simpleWebService.wsdl</wsdlFile>
-                            </wsdlFiles>
-                            <wsdlLocation>/wsdl/simpleWebService.wsdl</wsdlLocation>
-                            <keep>true</keep>
-                            <packageName>com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews</packageName>
-                            <sourceDestDir>${project.build.directory}/generated/src/main/java</sourceDestDir>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <wsdlDirectory>${project.basedir}/src/main/resources/wsdl</wsdlDirectory>
+                    <wsdlFiles>
+                        <wsdlFile>simpleWebService.wsdl</wsdlFile>
+                    </wsdlFiles>
+                    <sourceDestDir>${basedir}/target/generated/src/main/java</sourceDestDir>
+                    <wsdlLocation>/wsdl/simpleWebService.wsdl</wsdlLocation>
+                    <packageName>com.magicvalleyworks.remotewstarget.wsfacadeapi</packageName>
+                    <keep>true</keep>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>javax.xml.ws</groupId>

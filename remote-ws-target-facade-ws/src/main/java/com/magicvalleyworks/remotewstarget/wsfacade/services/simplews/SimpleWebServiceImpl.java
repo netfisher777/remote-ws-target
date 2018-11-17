@@ -1,15 +1,15 @@
 package com.magicvalleyworks.remotewstarget.wsfacade.services.simplews;
 
-import com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews.Data;
-import com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews.SimpleWebService;
+import com.magicvalleyworks.remotewstarget.wsfacadeapi.Data;
+import com.magicvalleyworks.remotewstarget.wsfacadeapi.SimpleWebService;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.util.Date;
 
 @WebService(name = "SimpleWebService",
-        serviceName = "SimpleWebService",
-        endpointInterface = "com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews.SimpleWebService",
+        serviceName = "SimpleWebService", // Must be specified to override default
+        endpointInterface = "com.magicvalleyworks.remotewstarget.wsfacadeapi.SimpleWebService",
         targetNamespace = "http://remotewstarget.magicvalleyworks.com/")
 public class SimpleWebServiceImpl implements SimpleWebService {
 

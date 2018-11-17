@@ -1,8 +1,8 @@
 package com.magicvalleyworks.remotewstarget.facadewsapi.clientproxy;
 
-import com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews.Data;
-import com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews.SimpleWebService;
-import com.magicvalleyworks.remotewstarget.wsfacadeapi.simplews.SimpleWebService_Service;
+import com.magicvalleyworks.remotewstarget.wsfacadeapi.Data;
+import com.magicvalleyworks.remotewstarget.wsfacadeapi.SimpleWebService;
+import com.magicvalleyworks.remotewstarget.wsfacadeapi.SimpleWebService_Service;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
