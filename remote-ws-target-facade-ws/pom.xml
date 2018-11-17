@@ -21,8 +21,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.magicvalleyworks.wfwebconsulregistrar</groupId>
-            <artifactId>wf-web-consul-registrar</artifactId>
+            <groupId>com.magicvalleyworks.wfconsulwebregistrar</groupId>
+            <artifactId>wf-consul-web-registrar</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

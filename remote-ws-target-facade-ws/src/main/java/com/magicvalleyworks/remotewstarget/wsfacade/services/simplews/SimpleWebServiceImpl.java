@@ -9,6 +9,7 @@ import java.util.Date;
 
 @WebService(name = "SimpleWebService",
         serviceName = "SimpleWebService", // Must be specified to override default
+        wsdlLocation = "/wsdl/simpleWebService.wsdl",
         endpointInterface = "com.magicvalleyworks.remotewstarget.wsfacadeapi.SimpleWebService",
         targetNamespace = "http://remotewstarget.magicvalleyworks.com/")
 public class SimpleWebServiceImpl implements SimpleWebService {
