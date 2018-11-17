@@ -1,0 +1,11 @@
+---
+  webServiceRegistrationConfigurations:
+    - name: SimpleWebService
+      tags:
+        - internal
+        - ws
+        - soap
+      meta:
+        path: /SimpleWebService
+      httpHealthCheckPath: /SimpleWebService?wsdl
+...

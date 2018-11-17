@@ -1,9 +1,9 @@
 {
-  "webServiceRegConfigs": [
+  "webServiceRegistrationConfigurations": [
     {
       "name": "SimpleWebService",
       "tags": [
-        "private", "ws", "soap"
+        "internal", "ws", "soap"
       ],
       "meta": {
         "path": "/SimpleWebService"

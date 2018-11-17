@@ -5,7 +5,7 @@
          version="3.1">
     <context-param>
         <param-name>WEB_SERVICES_REGISTRATION_CONFIGURATION_FILE_NAME</param-name>
-        <param-value>ws-reg-conf.json</param-value>
+        <param-value>ws-reg-conf.yaml</param-value>
     </context-param>
     <!-- OPTIONAL PARAMETERS -->
     <context-param>
