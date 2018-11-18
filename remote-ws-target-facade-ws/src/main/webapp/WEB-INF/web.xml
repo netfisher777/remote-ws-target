@@ -7,16 +7,6 @@
         <param-name>WEB_SERVICES_REGISTRATION_CONFIGURATION_FILE_NAME</param-name>
         <param-value>ws-reg-conf.yaml</param-value>
     </context-param>
-    <!-- OPTIONAL PARAMETERS -->
-    <context-param>
-        <param-name>CONSUL_HOST_OVERRIDE</param-name>
-        <param-value>195.133.1.42</param-value>
-    </context-param>
-    <context-param>
-        <param-name>CONSUL_PORT_OVERRIDE</param-name>
-        <param-value>8500</param-value>
-    </context-param>
-    <!-- END OF OPTIONAL PARAMETERS -->
     <listener>
         <listener-class>com.magicvalleyworks.wfconsulwebregistrar.startup.ConsulRegistrarServletContextListener</listener-class>
     </listener>
