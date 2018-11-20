@@ -12,12 +12,29 @@
 
     <artifactId>remote-ws-target-facade-ws-api-proxy</artifactId>
 
+    <properties>
+        <consul.api.version>1.4.1</consul.api.version>
+        <commons.lang3.version>3.8.1</commons.lang3.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.magicvalleyworks.remotewstarget</groupId>
             <artifactId>remote-ws-target-facade-ws-api</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ecwid.consul</groupId>
+            <artifactId>consul-api</artifactId>
+            <version>${consul.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang3.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
