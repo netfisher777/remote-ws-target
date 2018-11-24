@@ -1,4 +1,4 @@
-package com.magicvalleyworks.remotewstarget.facadewsapi.clientproxy;
+package com.magicvalleyworks.remotewstarget.cbwc.factories;
 
 import com.ecwid.consul.v1.ConsulClient;
 import com.ecwid.consul.v1.QueryParams;
