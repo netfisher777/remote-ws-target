@@ -25,7 +25,7 @@ public abstract class AbstractConsulBasedWebServiceFactory {
     private static final String PRIMARY_SERVICE_TAG = "internal";
     private static final String WEB_SERVICE_PATH_META_KEY = "path";
 
-    private volatile ConsulClient consulClient;
+    private ConsulClient consulClient;
 
     @PostConstruct
     private void init() {
